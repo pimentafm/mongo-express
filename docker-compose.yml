@@ -5,12 +5,12 @@ services:
     image: mongodb
     container_name: mongodb
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=scrape
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME:-root}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD:-root}
+      - MONGO_INITDB_DATABASE=${MONGODB_DATABASE:-scrape}
     restart: unless-stopped
     ports:
-      - "27017:27017"
+      - "${MONGODB_PORT:-27017}:27017"
     volumes:
       - ./docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/:ro
       - ./Docker/Volumes/db:/data/db
