@@ -2,17 +2,16 @@ version: "3.8"
 
 services:
   mongo:
-    image: mongo
+    build: ./mongo
     container_name: mongodb
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME:-root}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD:-root}
-      - MONGO_INITDB_DATABASE=${MONGODB_DATABASE:-scrape}
+      - MONGO_INITDB_ROOT_DATABASE=${MONGODB_DATABASE:-information}
     restart: unless-stopped
     ports:
       - "${MONGODB_PORT:-27017}:27017"
     volumes:
-      - ./docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/:ro
       - ./docker/volumes/db:/data/db
     networks:
       - mongodb-network
