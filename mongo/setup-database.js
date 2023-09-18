@@ -6,4 +6,4 @@ db.createUser({
   roles: [{ role: 'readWrite', db: process.env.MONGO_INITDB_ROOT_DATABASE }],
 });
 
-db.createCollection('information')
+db.createCollection('people')
